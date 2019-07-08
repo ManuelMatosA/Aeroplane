@@ -359,6 +359,7 @@ public class Main {
 
                         case "economy":
 
+                            //Checks if first class is full
                             for (int x = FIRST_CLASS_NUMBER_OF_SEATS; x < plane.length; x++) {
                                 for (int y = 0; y < plane[x].length; y++) {
                                     if (!plane[x][y]) {
@@ -369,6 +370,7 @@ public class Main {
                                 }
                             }
 
+                            //If economy is full but first class isn't
                             if (!firstClassFull && economyClassFull) {
                                 System.out.println( "~~~~~~~~~~~~~~~~~~~~~~~~~~" );
                                 System.out.println( "Economy is currently full." );
@@ -379,6 +381,7 @@ public class Main {
                                 System.out.print( "#" );
                                 elseEconomyClass = in.nextLine();
 
+                                //If user doesN'T want to book in first class
                                 if (!elseEconomyClass.equalsIgnoreCase( "Yes" )) {
                                     System.out.println( "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" );
                                     System.out.println( "Next flight leaves in 3 hours." );
@@ -390,6 +393,7 @@ public class Main {
                                     System.out.println();
                                     System.out.println();
                                     break;
+                                    //If user does want to book in first class
                                 } else {
                                     do {
                                         System.out.println( "****************************************************" );
@@ -419,6 +423,7 @@ public class Main {
                                     System.out.print( "#" );
                                     firstSeat = in.nextLine();
 
+                                    //Assigns the letter typed into it's correspondent number variable
                                     if (firstSeat.equalsIgnoreCase( "A" )) {
                                         firstSeatCol = 0;
                                     } else if (firstSeat.equalsIgnoreCase( "B" )) {
@@ -437,10 +442,12 @@ public class Main {
                                         firstSeatCol = 7;
                                     }
 
+                                    //Print if seat is taken
                                     if (plane[firstRow][firstSeatCol]) {
                                         System.out.println( "~~~~~~~~~~~~~~~~~~" );
                                         System.out.println( "Seat already taken" );
                                         System.out.println( "~~~~~~~~~~~~~~~~~~" );
+                                        //Else Book seat
                                     } else {
                                         plane[firstRow][firstSeatCol] = true;
                                         passengers[firstRow][firstSeatCol] = lastName + ", " + name + ". Passport Number: " + passport + ", Reservation Number: " + counterFirstClass + ", located in first class: Seat " + firstSeat + " in row " + (firstRow + 1) + ".";
@@ -455,6 +462,7 @@ public class Main {
                                 }
                             }
 
+                            //If both are full
                             if (firstClassFull && economyClassFull) {
                                 System.out.println( "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" );
                                 System.out.println( "Next flight leaves in 3 hours." );
@@ -498,7 +506,7 @@ public class Main {
                             System.out.print( "#" );
                             economySeat = in.nextLine();
 
-
+                            //Assigns the letter typed into it's correspondent number variable
                             if (economySeat.equalsIgnoreCase( "A" )) {
                                 economySeatCol = 0;
                             } else if (economySeat.equalsIgnoreCase( "B" )) {
@@ -544,6 +552,7 @@ public class Main {
                     break;
                 case "staff":
 
+                    //Creates Password
                     if (counterPassword == 0) {
                         while (!passwordTemporal.matches( "\\d{4}" )) {
                             System.out.println( "Welcome! Please create a 4 digit staff password." );
@@ -559,8 +568,10 @@ public class Main {
                             }
                         }
                     }
+                    //Avoid recreating password
                     counterPassword++;
 
+                    //Validates Password
                     if (counterPassword > 0) {
                         while (!password.equals( passwordTemporal )) {
                             System.out.println( "Please, enter your staff password." );
@@ -576,6 +587,7 @@ public class Main {
                         }
                     }
 
+                    //Resets Password
                     password = "B";
 
                     System.out.println();
@@ -586,6 +598,7 @@ public class Main {
                     sentinel = in.nextLine();
                     System.out.println();
 
+                    //Only prints the first time it's being used
                     if (counterPassword == 1) {
                         System.out.println( "##############################################################################################################################" );
                         System.out.println( "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~HOW TO USE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" );
@@ -601,6 +614,7 @@ public class Main {
                     passengerList = in.nextLine();
                     System.out.println();
 
+                    //Prints all passengers
                     if (passengerList.equalsIgnoreCase( "Yes" )) {
                         for (String[] passenger : passengers) {
                             for (int col = 0; col < passengers[0].length; col++) {
@@ -609,6 +623,7 @@ public class Main {
                                 }
                             }
                         }
+                        //Checks if plane is full
                         for (String[] passenger : passengers) {
                             for (int col = 0; col < passengers[0].length; col++) {
                                 if (passenger[col].equals( " " )) {
@@ -617,10 +632,11 @@ public class Main {
                             }
                         }
 
+                        //Prints This if the plane is not yet full
                         if (NoSeatsOccupied) {
-                            System.out.println( "~~~~~~~~~~~~~~" );
+                            System.out.println( "~~~~~~~~~~~~~~~~" );
                             System.out.println( "Plane isn't full" );
-                            System.out.println( "~~~~~~~~~~~~~~" );
+                            System.out.println( "~~~~~~~~~~~~~~~~" );
                             System.out.println();
                         }
                     }
@@ -633,7 +649,9 @@ public class Main {
                     System.out.println();
 
                     if (showTotalSales.equalsIgnoreCase( "Yes" )) {
+                        //Calculates total
                         totalSales = firstClassSales + economySales;
+                        //Calculates average and avoids dividing by 0
                         if (countSalesFirstClass > 0 && countSalesEconomy > 0) {
                             averageSales = (countSalesFirstClass + countSalesEconomy) / (SEATS_FIRST_CLASS + SEATS_ECONOMY) * 100;
                         }
